@@ -1,4 +1,4 @@
-# Kyulacs [![Build Status](https://github.com/terasakisatoshi/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/terasakisatoshi/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain) [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://terasakisatoshi.github.io/Kyulacs.jl/stable) [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://terasakisatoshi.github.io/Kyulacs.jl/dev)
+# [Kyulacs.jl](https://github.com/AtelierArith/Kyulacs.jl) [![Build Status](https://github.com/terasakisatoshi/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/terasakisatoshi/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain) [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://terasakisatoshi.github.io/Kyulacs.jl/stable) [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://terasakisatoshi.github.io/Kyulacs.jl/dev)
 
 Unofficial Julia interface for [qulacs](https://github.com/qulacs/qulacs#python-sample-code).
 
