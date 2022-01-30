@@ -1,0 +1,13 @@
+name = "Kyulacs"
+uuid = "b612f6cd-3a6e-4e62-9d6b-447ae96af911"
+authors = ["Satoshi Terasaki <terasakisatoshi.math@gmail.com> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

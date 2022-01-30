@@ -1,0 +1,45 @@
+version: '3'
+services:
+  jupyter:
+    image: kyulacsjl
+    container_name: kyulacsjl-jupyter
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    ports:
+      - "8888:8888"
+    command: jupyter notebook --notebook-dir /workspace/Kyulacs.jl --ip=0.0.0.0 --allow-root
+  lab:
+    image: kyulacsjl
+    container_name: kyulacsjl-lab
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    ports:
+      - "8888:8888"
+    command: jupyter lab --notebook-dir /workspace/Kyulacs.jl --ip=0.0.0.0 --allow-root
+  julia:
+    image: kyulacsjl
+    container_name: kyulacsjl-julia
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    command: julia --project=/workspace/Kyulacs.jl
+  web:
+    image: kyulacsjl
+    container_name: kyulacsjl-packagedocs
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    ports:
+      - "8000:8000"
+    command: make web
+  pluto:
+    image: kyulacsjl
+    container_name: kyulacsjl-pluto
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    ports:
+      - "1234:1234"
+    command: julia -e 'import Pluto; Pluto.run(host="0.0.0.0", port=1234)'
