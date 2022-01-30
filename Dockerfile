@@ -138,7 +138,11 @@ RUN julia --threads auto -e '\
 ENV JULIA_PROJECT "@."
 WORKDIR /workspace/Kyulacs.jl
 
-RUN mkdir -p /workspace/Kyulacs.jl/src && echo "module ML3D end" > /workspace/Kyulacs.jl/src/Kyulacs.jl
+USER root
+RUN chown -R ${NB_UID} /workspace/Kyulacs.jl
+USER ${USER}
+
+RUN mkdir -p /workspace/Kyulacs.jl/src && echo "module Kyulacs end" > /workspace/Kyulacs.jl/src/Kyulacs.jl
 COPY ./Project.toml /workspace/Kyulacs.jl
 
 ENV PATH=${PATH}:${HOME}/.local/bin

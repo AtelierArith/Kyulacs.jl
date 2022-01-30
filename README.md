@@ -65,7 +65,7 @@ $ CONFIGURE_OPTS="--enable-shared" asdf install python 3.8.11
 4. Install Kyulacs.jl
 
 ```conosle
-$ git clone https://github.com/terasakisatoshi/Kyulacs.jl.git
+$ git clone https://github.com/AtelierArith/Kyulacs.jl.git
 $ cd Kyulacs.jl
 $ julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 $ julia --project=@. -e 'using Pkg; Pkg.test()'
@@ -143,4 +143,12 @@ $ diff readme_example.py readme_example.jl
 < print(value)
 ---
 > println(value)
+```
+
+# Appendix
+
+```console
+$ git clone https://github.com/AtelierArith/Kyulacs.jl.git
+$ cd Kyulacs.jl
+$ make && make test
 ```
