@@ -13,6 +13,8 @@ for class in [:Observable, :QuantumState, :QuantumCircuit]
             $(class)(args...)=new(qulacs.$class(args...))
         end
 
+        PyObject(t::$(class)) = t.pyobj
+
         function Base.propertynames(t::$(class))
             propertynames(getfield(t, :pyobj))
         end
