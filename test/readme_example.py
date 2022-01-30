@@ -1,13 +1,8 @@
-using Kyulacs: Observable, QuantumCircuit, QuantumState
-using Kyulacs: qulacs
-using Kyulacs.Gate: CNOT, Y, merge
-using PyCall
+from qulacs import Observable, QuantumCircuit, QuantumState
+from qulacs.gate import Y, CNOT, merge
 
-using Test
 
-@pyinclude("readme_example.py")
-
-@testset "readme_example" begin
+def readme_example():
     state = QuantumState(3)
     seed = 0
     state.set_Haar_random_state(seed)
@@ -23,5 +18,4 @@ using Test
     observable.add_operator(2.0, "X 2 Y 1 Z 0")
     observable.add_operator(-3.0, "Z 2")
     value = observable.get_expectation_value(state)
-    @test value == py"readme_example"()
-end
+    return value
