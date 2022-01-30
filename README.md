@@ -76,7 +76,7 @@ $ julia --project=@. -e 'using Pkg; Pkg.test()'
 Let's assume you've written a Python code which is similar to [Python sample code](https://github.com/qulacs/qulacs#python-sample-code) given by qulacs.
 
 ```python
-# readme_example.py
+# examples/readme_example.py
 from qulacs import Observable, QuantumCircuit, QuantumState
 from qulacs.gate import Y, CNOT, merge
 
@@ -100,10 +100,18 @@ print(value)
 
 ```
 
-In Julia, achieve the same functionality with `Kyulacs` package we provide.
+You can try this code out of the box even if you are not familiar with quantum computing.
+
+```conosle
+$ cd /path/to/this/repository
+$ julia --project=@. examples/readme_example.jl
+0.2835596510287872
+```
+
+In Julia, we can achieve the same functionality with `Kyulacs` package.
 
 ```julia
-# readme_example.jl
+# examples/readme_example.jl
 using Kyulacs: Observable, QuantumCircuit, QuantumState
 using Kyulacs.Gate: CNOT, Y, merge
 
@@ -127,7 +135,15 @@ println(value)
 
 ```
 
-In fact, `diff` tells they are almost same.
+Have a try!!!
+
+```console
+$ cd /path/to/this/repository
+$ julia --project=@. examples/readme_example.jl
+0.2835596510287872
+```
+
+These are pretty much the same thing. In fact, `diff` tells these are almost same.
 
 ```console
 $ diff readme_example.py readme_example.jl
