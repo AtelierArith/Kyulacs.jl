@@ -8,15 +8,15 @@ const qulacs = PyNULL()
 const gate = PyNULL()
 
 const qulacs_class = [
-:DensityMatrix,                :QuantumGate_SingleParameter,
-:GeneralQuantumOperator,       :QuantumState,
-:Observable,                   :QuantumStateBase,
-:ParametricQuantumCircuit,     :StateVector,
-:PauliOperator,                #:circuit
-:QuantumCircuit,               #:gate
-:QuantumCircuitSimulator,      #:observable
-:QuantumGateBase,              #:quantum_operator
-:QuantumGateMatrix,            #:state
+    :DensityMatrix, :QuantumGate_SingleParameter,
+    :GeneralQuantumOperator, :QuantumState,
+    :Observable, :QuantumStateBase,
+    :ParametricQuantumCircuit, :StateVector,
+    :PauliOperator,                #:circuit
+    :QuantumCircuit,               #:gate
+    :QuantumCircuitSimulator,      #:observable
+    :QuantumGateBase,              #:quantum_operator
+    :QuantumGateMatrix,            #:state
 ]
 
 for class in qulacs_class
@@ -129,7 +129,7 @@ const gate_functions = [
 for func in gate_functions
     @eval begin
         function $(func)(args...; kwargs...)
-            qulacs.gate.$(func)(args...;kwargs...)
+            qulacs.gate.$(func)(args...; kwargs...)
         end
         export $(func)
     end
