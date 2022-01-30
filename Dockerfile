@@ -95,6 +95,8 @@ RUN jupyter labextension install jupyterlab-topbar-extension && \
     rm -rf ~/.node-gyp && \
     echo Done
 
+RUN pip3 install qulacs numpy sympy
+
 WORKDIR ${HOME}
 USER ${USER}
 

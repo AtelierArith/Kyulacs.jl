@@ -6,11 +6,11 @@ DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
 makedocs(;
     modules=[Kyulacs],
     authors="Satoshi Terasaki <terasakisatoshi.math@gmail.com> and contributors",
-    repo="https://github.com/terasakisatoshi/Kyulacs.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/AtelierArith/Kyulacs.jl/blob/{commit}{path}#{line}",
     sitename="Kyulacs.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://terasakisatoshi.github.io/Kyulacs.jl",
+        canonical="https://AtelierArith.github.io/Kyulacs.jl",
         assets=String[],
     ),
     pages=[
@@ -19,6 +19,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/terasakisatoshi/Kyulacs.jl",
+    repo="github.com/AtelierArith/Kyulacs.jl",
     devbranch="main",
 )
