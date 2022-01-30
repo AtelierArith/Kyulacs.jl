@@ -1,5 +1,4 @@
 using Kyulacs: Observable, QuantumCircuit, QuantumState
-using Kyulacs: qulacs
 using Kyulacs.Gate: CNOT, Y, merge
 using PyCall
 
@@ -9,7 +8,7 @@ using Test
 
 @testset "readme_example" begin
     state = QuantumState(3)
-    seed = 0
+    seed = 0 # set random seed
     state.set_Haar_random_state(seed)
 
     circuit = QuantumCircuit(3)

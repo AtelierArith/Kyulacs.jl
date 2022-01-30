@@ -4,7 +4,7 @@ from qulacs.gate import Y, CNOT, merge
 
 def readme_example():
     state = QuantumState(3)
-    seed = 0
+    seed = 0  # set random seed
     state.set_Haar_random_state(seed)
 
     circuit = QuantumCircuit(3)
