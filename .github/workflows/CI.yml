@@ -37,9 +37,10 @@ jobs:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
       - uses: julia-actions/cache@v1
-      - name: "Add and build PyCall"
-        run: julia -e 'ENV["PYTHON"]=Sys.which("python3"); using Pkg; Pkg.add("PyCall")'
-      - uses: julia-actions/julia-buildpkg@v1
+      - name: "Add PyCall and build packages"
+        run: |
+          julia -e 'ENV["PYTHON"]=Sys.which("python3"); using Pkg; Pkg.activate("."); Pkg.instantiate()'
+      #- uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
   docs:
     name: Documentation
