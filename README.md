@@ -1,6 +1,6 @@
 # [Kyulacs.jl](https://github.com/AtelierArith/Kyulacs.jl) 
 
-[![Build Status](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/terasakisatoshi/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain) 
+[![Build Status](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain) 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://AtelierArith.github.io/Kyulacs.jl/stable) 
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://AtelierArith.github.io/Kyulacs.jl/dev)
 
