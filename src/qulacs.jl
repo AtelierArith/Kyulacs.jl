@@ -43,7 +43,6 @@ for class in qulacs_class
     end
 end
 
-# Write your package code here.
 function __init__()
     copy!(qulacs, pyimport("qulacs"))
 end
