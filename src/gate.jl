@@ -2,10 +2,7 @@ module Gate
 
 using PyCall
 
-export gate
-
 qulacs = PyNULL()
-gate = PyNULL()
 
 const gate_classes = [
     :Adaptive, :RX,
@@ -83,7 +80,6 @@ end
 
 function __init__()
     copy!(qulacs, pyimport("qulacs"))
-    copy!(gate, pyimport("qulacs.gate"))
 end
 
 end # module Gate
