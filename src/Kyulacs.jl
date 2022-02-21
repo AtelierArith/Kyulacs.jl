@@ -9,4 +9,7 @@ include("qulacs.jl")
 # qulacs.gate
 include("gate.jl")
 
+# qulacs.state
+include("state.jl")
+
 end # module Kyulacs
