@@ -6,6 +6,8 @@ using Reexport
 include("qulacs.jl")
 @reexport using .Qulacs
 
+include("qulacs_gpu.jl")
+
 # qulacs.circuit
 include("circuit.jl")
 
@@ -22,3 +24,4 @@ include("quantum_operator.jl")
 include("state.jl")
 
 end # module Kyulacs
+
