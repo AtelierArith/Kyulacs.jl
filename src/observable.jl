@@ -1,4 +1,4 @@
-module Observable
+module ObservableFunctions
 
 using PyCall
 
@@ -23,4 +23,4 @@ function __init__()
     copy!(qulacs, pyimport("qulacs"))
 end
 
-end # module Observable
+end # module ObservableFunctions
