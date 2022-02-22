@@ -1,28 +1,18 @@
-module Qulacs
+module Circuit
 
 using PyCall
 
-export qulacs
-
 const qulacs = PyNULL()
 
-const qulacs_class = [
-    :DensityMatrix, :QuantumGate_SingleParameter,
-    :GeneralQuantumOperator, :QuantumState,
-    :Observable, :QuantumStateBase,
-    :ParametricQuantumCircuit, :StateVector,
-    :PauliOperator,
-    :QuantumCircuit,
-    :QuantumCircuitSimulator,
-    :QuantumGateBase,
-    :QuantumGateMatrix,
+const circuit_class = [
+    :QuantumCircuitOptimizer,
 ]
 
-for class in qulacs_class
+for class in circuit_class
     @eval begin
         struct $class
             pyobj::PyObject
-            $(class)(args...) = new(qulacs.$(class)(args...))
+            $(class)(args...) = new(qulacs.circuit.$(class)(args...))
         end
 
         PyObject(t::$(class)) = t.pyobj
@@ -47,4 +37,4 @@ function __init__()
     copy!(qulacs, pyimport("qulacs"))
 end
 
-end
+end # module
