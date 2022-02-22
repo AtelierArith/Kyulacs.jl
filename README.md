@@ -1,7 +1,7 @@
-# [Kyulacs.jl](https://github.com/AtelierArith/Kyulacs.jl) 
+# [Kyulacs.jl](https://github.com/AtelierArith/Kyulacs.jl)
 
-[![Build Status](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain) 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://AtelierArith.github.io/Kyulacs.jl/stable) 
+[![Build Status](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/AtelierArith/Kyulacs.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://AtelierArith.github.io/Kyulacs.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://AtelierArith.github.io/Kyulacs.jl/dev)
 
 Unofficial Julia interface for [qulacs](https://github.com/qulacs/qulacs).
@@ -164,6 +164,20 @@ $ diff readme_example.py readme_example.jl
 ---
 > println(value)
 ```
+
+# Code Design
+
+When you want migrate your code from Python to Julia, the following table may help you:
+
+Python  | Julia
+------------- | -------------
+`from qulacs.circuit import something` | `using Kyulacs.Gate: something`
+`from qulacs.gate import something` | `using Kyulacs.Gate: something`
+`from qulacs.observable import something` | `using Kyulacs.ObservableFunctions: something`
+`from qulacs.quantum_operator import something` | `using Kyulacs.QuantumOperator: something`
+`from qulacs.state import something` | `using Kyulacs.State: something`
+
+If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send your feedback/idea to [our issue tracker](https://github.com/AtelierArith/Kyulacs.jl/issues).
 
 # Appendix
 
