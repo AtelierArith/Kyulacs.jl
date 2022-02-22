@@ -11,9 +11,9 @@ build:
 	docker-compose run --rm julia julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 	docker-compose run --rm julia julia --project=docs -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
 
-build:
+build-gpu:
 	-rm -f Manifest.toml docs/Manifest.toml
-	docker build -t ${DOCKER_IMAGE} .
+	docker build -t ${DOCKER_IMAGE} -f Dockerfile.gpu .
 	docker-compose build
 	docker-compose run --rm julia-gpu julia --project=@. -e 'using Pkg; Pkg.instantiate()'
 	docker-compose run --rm julia-gpu julia --project=docs -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
