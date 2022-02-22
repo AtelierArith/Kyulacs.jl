@@ -11,11 +11,11 @@ const qulacs_class = [
     :GeneralQuantumOperator, :QuantumState,
     :Observable, :QuantumStateBase,
     :ParametricQuantumCircuit, :StateVector,
-    :PauliOperator,                #:circuit
-    :QuantumCircuit,               #:gate
-    :QuantumCircuitSimulator,      #:observable
-    :QuantumGateBase,              #:quantum_operator
-    :QuantumGateMatrix,            #:state
+    :PauliOperator,
+    :QuantumCircuit,
+    :QuantumCircuitSimulator,
+    :QuantumGateBase,
+    :QuantumGateMatrix,
 ]
 
 for class in qulacs_class
