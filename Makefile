@@ -28,8 +28,8 @@ web: docs
 test: build
 	docker-compose run --rm julia julia -e 'using Pkg; Pkg.activate("."); Pkg.test()'
 
-test-gpu: build
-	docker-compose run --rm julia-gpu julia -e 'using Pkg; Pkg.activate("."); Pkg.test()'
+test-gpu: build-gpu
+	docker-compose run --rm julia-gpu julia -e 'using Pkg; Pkg.activate("."); Pkg.test(); include("examples/readme_example_gpu.jl")'
 
 clean:
 	docker-compose down

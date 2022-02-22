@@ -24,6 +24,9 @@ RUN wget https://raw.githubusercontent.com/abelsiqueira/jill/main/jill.sh && \
     /bin/bash jill.sh --version 1.7.2 --yes && \
     rm jill.sh
 
+ENV JULIA_PROJECT "@."
+WORKDIR /workspace/Kyulacs.jl
+
 RUN mkdir -p /workspace/Kyulacs.jl/src && echo "module Kyulacs end" > /workspace/Kyulacs.jl/src/Kyulacs.jl
 COPY ./Project.toml /workspace/Kyulacs.jl
 
