@@ -179,10 +179,22 @@ Python  | Julia
 
 If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send your feedback/idea to [our issue tracker](https://github.com/AtelierArith/Kyulacs.jl/issues).
 
+# GPU API
+
+`using Kyulacs.GPU` will export `StateVectorGpu` and `QuantumStateGpu` that wraps `qulacs.StateVectorGpu` and `qulacs.QuantumStateGpu` respectively.
+
+
 # Appendix
+
+## Docker
 
 ```console
 $ git clone https://github.com/AtelierArith/Kyulacs.jl.git
 $ cd Kyulacs.jl
 $ make && make test
+$ make build-gpu && make test-gpu # for gpu version
 ```
+
+## Blog post
+
+- [Japanese blog post:](https://zenn.dev/terasakisatoshi/articles/983a7401524251)
