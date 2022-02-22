@@ -25,6 +25,14 @@ services:
       - ./:/workspace/Kyulacs.jl
     working_dir: /workspace/Kyulacs.jl
     command: julia --project=/workspace/Kyulacs.jl
+  julia-gpu:
+    image: kyulacsjl
+    runtime: nvidia
+    container_name: kyulacsjl-julia-gpu
+    volumes:
+      - ./:/workspace/Kyulacs.jl
+    working_dir: /workspace/Kyulacs.jl
+    command: julia --project=/workspace/Kyulacs.jl
   web:
     image: kyulacsjl
     container_name: kyulacsjl-packagedocs

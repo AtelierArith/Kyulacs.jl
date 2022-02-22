@@ -1,0 +1,34 @@
+FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    cmake \
+    software-properties-common \
+    build-essential \
+    curl \
+    wget \
+    && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    python3 \
+    python3-dev \
+    python3-tk \
+    python3-pip
+
+RUN pip3 install qulacs-gpu cupy-cuda111
+RUN wget https://raw.githubusercontent.com/abelsiqueira/jill/main/jill.sh && \
+    /bin/bash jill.sh --version 1.7.2 --yes && \
+    rm jill.sh
+
+RUN mkdir -p /workspace/Kyulacs.jl/src && echo "module Kyulacs end" > /workspace/Kyulacs.jl/src/Kyulacs.jl
+COPY ./Project.toml /workspace/Kyulacs.jl
+
+RUN rm -f Manifest.toml && julia -e 'using Pkg; \
+    Pkg.instantiate(); \
+    Pkg.precompile()' && \
+    # Check Julia version \
+    julia -e 'using InteractiveUtils; versioninfo()'
