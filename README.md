@@ -197,4 +197,9 @@ $ make build-gpu && make test-gpu # for gpu version
 
 ## Blog post
 
-- [Japanese blog post:](https://zenn.dev/terasakisatoshi/articles/983a7401524251)
+- [Zenn: (Japanese blog post)](https://zenn.dev/terasakisatoshi/articles/983a7401524251)
+
+# Sponsorship
+
+If you want to see more of our work, consider sponsoring us via [Github sponsors](https://github.com/sponsors/terasakisatoshi).
+
