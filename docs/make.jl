@@ -6,7 +6,7 @@ import Documenter.Utilities.MDFlatten: mdflatten
 
 #DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
 
-mdflatten(io:IOBuffer, h::LazyHelp, md::Markdown.MD) = nothing
+mdflatten(io::IOBuffer, h::LazyHelp, md::Markdown.MD) = nothing
 
 makedocs(;
     modules=[Kyulacs],
