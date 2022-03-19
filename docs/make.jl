@@ -1,7 +1,7 @@
 using Kyulacs
 using Documenter
 
-DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
+#DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
 
 makedocs(;
     modules=[Kyulacs],
@@ -16,6 +16,7 @@ makedocs(;
     pages=[
         "Home" => "index.md",
     ],
+    doctest=false,
 )
 
 deploydocs(;
