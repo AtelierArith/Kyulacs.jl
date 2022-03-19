@@ -1,6 +1,9 @@
 module Kyulacs
 
+using PyCall
 using Reexport
+
+include("pywraputils.jl")
 
 # qulacs
 include("qulacs.jl")
