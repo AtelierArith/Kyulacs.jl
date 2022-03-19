@@ -2,7 +2,10 @@ module ObservableFunctions
 
 using PyCall
 
-qulacs = PyNULL()
+import ..@pyfunc
+
+#qulacs = PyNULL()
+observable = PyNULL()
 
 const observable_functions = [
     :create_observable_from_openfermion_file,
@@ -10,6 +13,7 @@ const observable_functions = [
     :create_split_observable,
 ]
 
+#=
 for func in observable_functions
     @eval begin
         function $(func)(args...; kwargs...)
@@ -18,9 +22,18 @@ for func in observable_functions
         export $(func)
     end
 end
+=#
+
+for func in observable_functions
+    @eval begin
+        @pyfunc observable $(func)
+        export $(func)
+    end
+end
 
 function __init__()
-    copy!(qulacs, pyimport("qulacs"))
+    #copy!(qulacs, pyimport("qulacs"))
+    copy!(observable, pyimport("qulacs.observable"))
 end
 
 end # module ObservableFunctions

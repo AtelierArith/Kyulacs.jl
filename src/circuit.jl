@@ -2,12 +2,17 @@ module Circuit
 
 using PyCall
 
-const qulacs = PyNULL()
+import ..@pyfunc
+import ..@pyclass
+
+#const qulacs = PyNULL()
+const circuit = PyNULL()
 
 const circuit_class = [
     :QuantumCircuitOptimizer,
 ]
 
+#=
 for class in circuit_class
     @eval begin
         struct $class
@@ -32,9 +37,17 @@ for class in circuit_class
         export $(class)
     end
 end
+=#
 
+for class in circuit_class
+    @eval begin
+        @pyclass circuit $(class)
+        export $(class)
+    end
+end
 function __init__()
-    copy!(qulacs, pyimport("qulacs"))
+    #copy!(qulacs, pyimport("qulacs"))
+    copy!(circuit, pyimport("qulacs.circuit"))
 end
 
 end # module
