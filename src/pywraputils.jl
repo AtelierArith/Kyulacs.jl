@@ -51,7 +51,7 @@ macro pyfunc(_pymod, _func)
 	quote
 		@doc LazyHelp($(pymod), nameof($(func))) 
 			function $(func)(args...; kwargs...)
-				$(pymod).$(func)(args...; kwargs...)
+				getproperty($(pymod), nameof($(func)))(args...; kwargs...)
 			end
 	end
 end

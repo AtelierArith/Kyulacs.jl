@@ -1,9 +1,11 @@
 module State
 
 using PyCall
+import ..@pyfunc
 
-qulacs = PyNULL()
+#qulacs = PyNULL()
 
+state = PyNULL()
 const state_functions = [
     :inner_product,
     :tensor_product,
@@ -12,6 +14,7 @@ const state_functions = [
     :partial_trace,
 ]
 
+#=
 for func in state_functions
     @eval begin
         function $(func)(args...; kwargs...)
@@ -20,9 +23,18 @@ for func in state_functions
         export $(func)
     end
 end
+=#
+
+for func in state_functions
+    @eval begin
+        @pyfunc state $(func)
+        export $(func)
+    end
+end
 
 function __init__()
-    copy!(qulacs, pyimport("qulacs"))
+    #copy!(qulacs, pyimport("qulacs"))
+    copy!(state, pyimport("qulacs.state"))
 end
 
 end # module State

@@ -1,8 +1,11 @@
 module Gate
 
 using PyCall
+import ..@pyfunc
+import ..@pyclass
 
-qulacs = PyNULL()
+# qulacs = PyNULL()
+gate = PyNULL()
 
 const gate_classes = [
     :Adaptive, :RX,
@@ -34,6 +37,7 @@ const gate_classes = [
     :ProbabilisticInstrument,    #:to_matrix_gate,
 ]
 
+#=
 for class in gate_classes
     @eval begin
         struct $class
@@ -58,6 +62,14 @@ for class in gate_classes
         export $(class)
     end
 end
+=#
+
+for class in gate_classes
+    @eval begin
+        @pyclass gate $(class)
+        export $(class)
+    end
+end
 
 const gate_functions = [
     :add,
@@ -69,6 +81,7 @@ const gate_functions = [
     :to_matrix_gate,
 ]
 
+#=
 for func in gate_functions
     @eval begin
         function $(func)(args...; kwargs...)
@@ -77,9 +90,18 @@ for func in gate_functions
         export $(func)
     end
 end
+=#
+
+for func in gate_functions
+    @eval begin
+        @pyfunc gate $(func)
+        export $(func)
+    end
+end
 
 function __init__()
-    copy!(qulacs, pyimport("qulacs"))
+    #copy!(qulacs, pyimport("qulacs"))
+    copy!(gate, pyimport("qulacs.gate"))
 end
 
 end # module Gate
