@@ -60,4 +60,4 @@ jobs:
             using Documenter: DocMeta, doctest
             using Kyulacs
             DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
-            doctest(Kyulacs)'
+            doctest(Kyulacs, doctest=false)'
