@@ -2,6 +2,9 @@ module Qulacs
 
 using PyCall
 
+import ..@pyfunc
+import ..@pyclass
+
 export qulacs
 
 const qulacs = PyNULL()
@@ -18,6 +21,7 @@ const qulacs_class = [
     :QuantumGateMatrix,
 ]
 
+#=
 for class in qulacs_class
     @eval begin
         struct $class
@@ -39,6 +43,14 @@ for class in qulacs_class
             end
         end
 
+        export $(class)
+    end
+end
+=#
+
+for class in qulacs_class
+    @eval begin
+        @pyclass qulacs $(class)
         export $(class)
     end
 end

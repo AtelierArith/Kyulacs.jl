@@ -49,7 +49,7 @@ jobs:
       - run: pip3 install qulacs
       - uses: julia-actions/setup-julia@v1
         with:
-          version: '1'
+          version: '1.6'
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-docdeploy@v1
         env:
@@ -57,7 +57,7 @@ jobs:
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
       - run: |
           julia --project=docs -e '
-            using Documenter: DocMeta, doctest
-            using Kyulacs
-            DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
-            doctest(Kyulacs)'
+            using Pkg
+            Pkg.develop(PackageSpec(path=pwd()))
+            Pkg.instantiate()'
+      - run: julia --project=docs docs/make.jl

@@ -1,6 +1,7 @@
 module GPU
 
 using PyCall
+import ..LazyHelp
 
 const qulacs = PyNULL()
 
@@ -11,7 +12,7 @@ const qulacs_class = [
 
 for class in qulacs_class
     @eval begin
-        struct $class
+        @doc LazyHelp(qulacs, nameof($(class))) struct $class
             pyobj::PyObject
             function $(class)(args...)
                 try
