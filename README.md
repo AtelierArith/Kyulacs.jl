@@ -143,6 +143,15 @@ Have a try!!!
 
 ```console
 $ cd /path/to/this/repository
+$ julia -e "using InteractiveUtils; versioninfo()"
+Julia Version 1.7.2
+Commit bf53498635 (2022-02-06 15:21 UTC)
+Platform Info:
+  OS: macOS (x86_64-apple-darwin19.5.0)
+  CPU: Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-12.0.1 (ORCJIT, skylake)
 $ julia --project=@. examples/readme_example.jl
 0.2835596510287872
 ```
@@ -183,6 +192,44 @@ If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send 
 
 `using Kyulacs.GPU` will export `StateVectorGpu` and `QuantumStateGpu` that wraps `qulacs.StateVectorGpu` and `qulacs.QuantumStateGpu` respectively.
 
+# Docker
+
+- You can run Kyulacs.jl out of the box inside Docker container
+
+```console
+$ docker run --rm -it julia:1.7.2
+               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.7.2 (2022-02-06)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+
+julia> using Pkg
+julia> pkg"registry add General https://github.com/AtelierArith/Gallery.git"
+julia> Pkg.add("Conda") # Install Conda.jl
+julia> using Conda
+julia> Conda.pip_interop(true)
+julia> Conda.pip("install", "qulacs")
+julia> using Kyulacs: Observable, QuantumCircuit, QuantumState
+julia> using Kyulacs.Gate: CNOT, Y, merge
+julia> state = QuantumState(3)
+julia> seed = 0  # set random seed
+julia> state.set_Haar_random_state(seed)
+julia> circuit = QuantumCircuit(3)
+julia> circuit.add_X_gate(0)
+julia> merged_gate = merge(CNOT(0, 1), Y(1))
+julia> circuit.add_gate(merged_gate)
+julia> circuit.add_RX_gate(1, 0.5)
+julia> circuit.update_quantum_state(state)
+julia> observable = Observable(3)
+julia> observable.add_operator(2.0, "X 2 Y 1 Z 0")
+julia> observable.add_operator(-3.0, "Z 2")
+julia> value = observable.get_expectation_value(state)
+julia> println(value) # 0.2086592572213417
+``` 
 
 # Appendix
 
