@@ -1,4 +1,4 @@
-FROM julia:1.7.2
+FROM julia:1.8.2
 
 # create user with a home directory
 ARG NB_USER=jovyan
@@ -95,7 +95,7 @@ RUN jupyter labextension install jupyterlab-topbar-extension && \
     rm -rf ~/.node-gyp && \
     echo Done
 
-RUN pip3 install qulacs numpy sympy
+RUN pip3 install qulacs numpy sympy scipy
 
 WORKDIR ${HOME}
 USER ${USER}

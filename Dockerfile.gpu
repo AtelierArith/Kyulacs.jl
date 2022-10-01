@@ -19,9 +19,9 @@ RUN apt-get update && \
     python3-tk \
     python3-pip
 
-RUN pip3 install qulacs-gpu cupy-cuda111
+RUN pip3 install qulacs-gpu cupy-cuda111 scipy numpy sympy
 RUN wget https://raw.githubusercontent.com/abelsiqueira/jill/main/jill.sh && \
-    /bin/bash jill.sh --version 1.7.2 --yes && \
+    /bin/bash jill.sh --version 1.8.2 --yes && \
     rm jill.sh
 
 ENV JULIA_PROJECT "@."
