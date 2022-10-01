@@ -8,31 +8,32 @@ LazyHelp(o, k::AbstractString) = LazyHelp(o, (k,))
 LazyHelp(o, k1::AbstractString, k2::AbstractString) = LazyHelp(o, (k1, k2))
 LazyHelp(o, s::Symbol) = LazyHelp(o, (string(s),))
 
-function show(io::IO, st, h::LazyHelp)
+function gendocstr(h::LazyHelp)
     py"""
     import inspect
     def get_signature(f):
-        try:
-            return str(inspect.signature(f))
-        except ValueError:
-            return ""
+       	try:
+       		return str(inspect.signature(f))
+       	except ValueError:
+       		return ""
     """
-
     o = h.o
     for k in h.keys
         o = o[k]
     end
-
     fname = hasproperty(o, "__name__") ? o.__name__ : ""
     sig = hasproperty(o, "__call__") ? py"get_signature"(o) : ""
     fdoc = hasproperty(o, "__doc__") ? o.__doc__ : ""
 
-    docstr = """
+    if isnothing(fdoc)
+        return """
         $(fname)$(sig)
-    $(fdoc)
-    """
-
-    print(io, docstr)
+        """
+    else
+        return """
+        $(fdoc)
+        """
+    end
 end
 
 Base.show(io::IO, h::LazyHelp) = show(io, "text/plain", h)
