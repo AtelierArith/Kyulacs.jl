@@ -27,4 +27,3 @@ include("quantum_operator.jl")
 include("state.jl")
 
 end # module Kyulacs
-
