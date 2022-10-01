@@ -1,6 +1,6 @@
 using Markdown
 using Kyulacs
-using Kyulacs:LazyHelp
+using Kyulacs: LazyHelp
 using Documenter
 import Documenter.Utilities.MDFlatten: mdflatten
 
@@ -16,8 +16,8 @@ function Documenter.Writers.HTMLWriter.mdconvert(
         ```
         $s
         ```
-        """
-        )
+        """,
+    )
     Documenter.Writers.HTMLWriter.mdconvert(m, parent; kwargs...)
 end
 
