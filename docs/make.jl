@@ -4,7 +4,6 @@ using Kyulacs:LazyHelp
 using Documenter
 import Documenter.Utilities.MDFlatten: mdflatten
 
-#DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
 function Documenter.Writers.HTMLWriter.mdconvert(
     h::LazyHelp,
     parent;
@@ -23,6 +22,8 @@ function Documenter.Writers.HTMLWriter.mdconvert(
 end
 
 mdflatten(io::IOBuffer, h::LazyHelp, md::Markdown.MD) = nothing
+
+#DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
 
 makedocs(;
     modules=[Kyulacs],
