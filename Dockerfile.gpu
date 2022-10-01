@@ -21,7 +21,7 @@ RUN apt-get update && \
 
 RUN pip3 install qulacs-gpu cupy-cuda111
 RUN wget https://raw.githubusercontent.com/abelsiqueira/jill/main/jill.sh && \
-    /bin/bash jill.sh --version 1.7.2 --yes && \
+    /bin/bash jill.sh --version 1.8.2 --yes && \
     rm jill.sh
 
 ENV JULIA_PROJECT "@."
