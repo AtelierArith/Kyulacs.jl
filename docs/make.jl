@@ -5,6 +5,22 @@ using Documenter
 import Documenter.Utilities.MDFlatten: mdflatten
 
 #DocMeta.setdocmeta!(Kyulacs, :DocTestSetup, :(using Kyulacs); recursive=true)
+function Documenter.Writers.HTMLWriter.mdconvert(
+    h::LazyHelp,
+    parent;
+    kwargs...,
+)
+    s = Kyulacs.gendocstr(h)
+    # quote docstring `s` to prevent changing display result
+    m = Markdown.parse(
+        """
+        ```
+        $s
+        ```
+        """
+        )
+    Documenter.Writers.HTMLWriter.mdconvert(m, parent; kwargs...)
+end
 
 mdflatten(io::IOBuffer, h::LazyHelp, md::Markdown.MD) = nothing
 
