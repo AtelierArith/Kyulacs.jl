@@ -18,7 +18,7 @@ $ pip3 install qulacs
 
 ```console
 $ pip3 install jill # A cross-platform installer for Pythonista
-$ jill install 1.7
+$ jill install 1.8
 ```
 
 After that you're supposed to add `${HOME}/.local/bin` to your `$PATH` environment variable. You'll see the result below:
@@ -32,7 +32,7 @@ $ julia
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.7.1 (2021-12-22)
+  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -51,7 +51,7 @@ $ julia
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.7.1 (2021-12-22)
+  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -99,7 +99,6 @@ observable = Observable(3)
 observable.add_operator(2.0, "X 2 Y 1 Z 0")
 observable.add_operator(-3.0, "Z 2")
 value = observable.get_expectation_value(state)
-# 0.2835596510287872
 print(value)
 
 ```
@@ -109,7 +108,6 @@ You can try this code out of the box even if you are not familiar with quantum c
 ```conosle
 $ cd /path/to/this/repository
 $ julia --project=@. examples/readme_example.jl
-0.2835596510287872
 ```
 
 In Julia, we can achieve the same functionality with `Kyulacs` package.
@@ -134,9 +132,7 @@ observable = Observable(3)
 observable.add_operator(2.0, "X 2 Y 1 Z 0")
 observable.add_operator(-3.0, "Z 2")
 value = observable.get_expectation_value(state)
-# 0.2835596510287872
 println(value)
-
 ```
 
 Have a try!!!
@@ -153,7 +149,6 @@ Platform Info:
   LIBM: libopenlibm
   LLVM: libLLVM-12.0.1 (ORCJIT, skylake)
 $ julia --project=@. examples/readme_example.jl
-0.2835596510287872
 ```
 
 These are pretty much the same thing. In fact, `diff` tells these are almost same.
@@ -197,13 +192,13 @@ If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send 
 - You can run Kyulacs.jl out of the box inside Docker container
 
 ```console
-$ docker run --rm -it julia:1.7.2
+$ docker run --rm -it julia:1.8.2
                _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.7.2 (2022-02-06)
+  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -213,6 +208,7 @@ julia> Pkg.add("Conda") # Install Conda.jl
 julia> using Conda
 julia> Conda.pip_interop(true)
 julia> Conda.pip("install", "qulacs")
+julia> Conda.pip("install", "scipy")
 julia> using Kyulacs: Observable, QuantumCircuit, QuantumState
 julia> using Kyulacs.Gate: CNOT, Y, merge
 julia> state = QuantumState(3)
@@ -228,8 +224,7 @@ julia> observable = Observable(3)
 julia> observable.add_operator(2.0, "X 2 Y 1 Z 0")
 julia> observable.add_operator(-3.0, "Z 2")
 julia> value = observable.get_expectation_value(state)
-julia> println(value) # 0.2086592572213417
-``` 
+```
 
 # Appendix
 
