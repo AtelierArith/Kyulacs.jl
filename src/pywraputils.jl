@@ -85,5 +85,20 @@ macro pyclass(_pymod, _class)
                 return getproperty(getfield(t, :pyobj), s)
             end
         end
+
+        """
+        Extract the docstring of a method in a given class
+        julia> using Kyulacs
+        julia> state = QuantumState(4)
+        help?> state.set_computational_basis
+        set_computational_basis(self: qulacs.QuantumState, index: int) -> None
+
+        Set state to computational basis
+
+
+        """
+        function Base.Docs.Binding(t::$(class), s::Symbol)
+            Base.Docs.Binding(getfield(t, :pyobj), s)
+        end
     end
 end
