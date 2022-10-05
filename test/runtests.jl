@@ -1,4 +1,4 @@
-using Kyulacs: Observable, QuantumCircuit, QuantumState
+using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
 using Kyulacs.Gate: CNOT, Y, merge
 using PyCall
 
@@ -23,4 +23,118 @@ using Test
     observable.add_operator(-3.0, "Z 2")
     value = observable.get_expectation_value(state)
     @test value == py"readme_example"()
+end
+
+# https://github.com/qulacs/qulacs/blob/main/python/test/test_qulacs.py
+@testset "TestQuantumState" begin
+    @testset "test_state_dim" begin
+        # setup
+        n = 4
+        dim = 2^n
+        state = QuantumState(n)
+
+        # runtest
+        v = state.get_vector()
+        @test length(v) == dim
+    end
+
+    @testset "test_zero_state" begin
+        # setup
+        n = 4
+        dim = 2^n
+        state = QuantumState(n)
+
+        # runtest
+        state.set_zero_state()
+        vector = state.get_vector()
+        expected = let
+            _expected = zeros(dim)
+            _expected[begin] = 1.0
+            _expected
+        end
+        @test vector ≈ expected
+    end
+
+    @testset "test_comp_basis" begin
+        # setup
+        n = 4
+        dim = 2^n
+        state = QuantumState(n)
+
+        pos = Int(0b0101)
+        state.set_computational_basis(pos)
+        vector = state.get_vector()
+
+        expected = let
+            _expected = zeros(dim)
+            _expected[begin+pos] = 1.0
+            _expected
+        end
+        @test vector ≈ expected
+    end
+end
+
+@testset "TestQuantumCircuit" begin
+    # setup
+    n = 4
+    dim = 2^4
+    state = QuantumState(n)
+    circuit = QuantumCircuit(n)
+
+    @testset "test_make_bell_state" begin
+        circuit.add_H_gate(0)
+        circuit.add_CNOT_gate(0, 1)
+        state.set_zero_state()
+        circuit.update_quantum_state(state)
+        vector = state.get_vector()
+        expected = let
+            _expected = zeros(dim)
+            _expected[begin+0] = sqrt(0.5)
+            _expected[begin+3] = sqrt(0.5)
+            _expected
+        end
+        @test vector ≈ expected
+    end
+end
+
+@testset "TestObservable" begin
+    @testset "test_get_matrix" begin
+        @testset "Observable" begin
+            n_qubits = 3
+            obs = Observable(n_qubits)
+            obs.add_operator(0.5, "Z 2")
+            obs.add_operator(1.0, "X 0 X 1 X 2")
+            obs.add_operator(1.0, "Y 1")
+            obs.get_matrix()
+            expected = ComplexF64[
+                0.5+0.0im 0.0+0.0im 0.0-1.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im
+                0.0+0.0im 0.5+0.0im 0.0+0.0im 0.0-1.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im
+                0.0+1.0im 0.0+0.0im 0.5+0.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im
+                0.0+0.0im 0.0+1.0im 0.0+0.0im 0.5+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im
+                0.0+0.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im -0.5+0.0im 0.0+0.0im 0.0-1.0im 0.0+0.0im
+                0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im -0.5+0.0im 0.0+0.0im 0.0-1.0im
+                0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+1.0im 0.0+0.0im -0.5+0.0im 0.0+0.0im
+                1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+1.0im 0.0+0.0im -0.5+0.0im
+            ]
+            @test obs.get_matrix().todense() ≈ expected
+        end
+        @testset "GeneralQuantumOperator" begin
+            n_qubits = 3
+            obs = GeneralQuantumOperator(n_qubits)
+            obs.add_operator(0.5im, "Z 2")
+            obs.add_operator(1.0, "X 0 X 1 X 2")
+            obs.add_operator(1.0, "Y 1")
+            expected = ComplexF64[
+                0.0+0.5im 0.0+0.0im 0.0-1.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im
+                0.0+0.0im 0.0+0.5im 0.0+0.0im 0.0-1.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im
+                0.0+1.0im 0.0+0.0im 0.0+0.5im 0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im
+                0.0+0.0im 0.0+1.0im 0.0+0.0im 0.0+0.5im 1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im
+                0.0+0.0im 0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0-0.5im 0.0+0.0im 0.0-1.0im 0.0+0.0im
+                0.0+0.0im 0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0-0.5im 0.0+0.0im 0.0-1.0im
+                0.0+0.0im 1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+1.0im 0.0+0.0im 0.0-0.5im 0.0+0.0im
+                1.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+0.0im 0.0+1.0im 0.0+0.0im 0.0-0.5im
+            ]
+            @test obs.get_matrix().todense() ≈ expected
+        end
+    end
 end
