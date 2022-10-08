@@ -31,7 +31,7 @@ const qulacs_classes = [
 const qulacs_functions = [
 ]
 
-for class in qulacs_class
+for class in qulacs_classes
     @eval begin
         @pyclass qulacs $(class)
         export $(class)

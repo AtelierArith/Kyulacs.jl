@@ -5,12 +5,12 @@ import ..LazyHelp
 
 const qulacs = PyNULL()
 
-const qulacs_class = [
+const qulacs_classes = [
     :QuantumStateGpu,
     :StateVectorGpu,
 ]
 
-for class in qulacs_class
+for class in qulacs_classes
     @eval begin
         @doc LazyHelp(qulacs, nameof($(class))) struct $class
             pyobj::PyObject
