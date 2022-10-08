@@ -1,8 +1,12 @@
+import Kyulacs
 using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
 using Kyulacs.Gate: CNOT, Y, merge
 using PyCall
 
 using Test
+
+# display package config
+Kyulacs.print_configurations()
 
 @pyinclude("readme_example.py")
 
