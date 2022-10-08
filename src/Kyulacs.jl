@@ -27,19 +27,18 @@ include("quantum_operator.jl")
 include("state.jl")
 
 function print_configurations()
-	metadata = pyimport("importlib.metadata")
-	println("-- PyCall.jl settings --")
+    metadata = pyimport("importlib.metadata")
+    println("-- PyCall.jl settings --")
     @show PyCall.pyversion
     @show Base.Filesystem.contractuser(PyCall.libpython)
     @show Base.Filesystem.contractuser(PyCall.pyprogramname)
     @show PyCall.conda
     println("-- Python dependencies --")
-	qulacs_version = metadata.distribution("qulacs").version
-	@show qulacs_version
-	scipy_version = metadata.distribution("scipy").version
-	@show scipy_version
-	nothing
+    qulacs_version = metadata.distribution("qulacs").version
+    @show qulacs_version
+    scipy_version = metadata.distribution("scipy").version
+    @show scipy_version
+    nothing
 end
-
 
 end # module Kyulacs
