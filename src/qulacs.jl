@@ -9,46 +9,29 @@ export qulacs
 
 const qulacs = PyNULL()
 
-const qulacs_class = [
-    :DensityMatrix, :QuantumGate_SingleParameter,
-    :GeneralQuantumOperator, :QuantumState,
-    :Observable, :QuantumStateBase,
-    :ParametricQuantumCircuit, :StateVector,
+const qulacs_classes = [
+    :CausalConeSimulator,
+    :DensityMatrix,
+    :GeneralQuantumOperator,
+    :GradCalculator,
+    :NoiseSimulator,
+    :Observable,
+    :ParametricQuantumCircuit,
     :PauliOperator,
     :QuantumCircuit,
     :QuantumCircuitSimulator,
     :QuantumGateBase,
     :QuantumGateMatrix,
+    :QuantumGate_SingleParameter,
+    :QuantumState,
+    :QuantumStateBase,
+    :StateVector,
 ]
 
-#=
-for class in qulacs_class
-    @eval begin
-        struct $class
-            pyobj::PyObject
-            $(class)(args...) = new(qulacs.$(class)(args...))
-        end
+const qulacs_functions = [
+]
 
-        PyObject(t::$(class)) = t.pyobj
-
-        function Base.propertynames(t::$(class))
-            propertynames(getfield(t, :pyobj))
-        end
-
-        function Base.getproperty(t::$(class), s::Symbol)
-            if s ∈ fieldnames($(class))
-                return getfield(t, s)
-            else
-                return getproperty(getfield(t, :pyobj), s)
-            end
-        end
-
-        export $(class)
-    end
-end
-=#
-
-for class in qulacs_class
+for class in qulacs_classes
     @eval begin
         @pyclass qulacs $(class)
         export $(class)

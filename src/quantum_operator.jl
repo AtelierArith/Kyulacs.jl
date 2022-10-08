@@ -4,25 +4,17 @@ using PyCall
 
 import ..@pyfunc
 
-#qulacs = PyNULL()
 quantum_operator = PyNULL()
+
+# --- qulacs_core.quantum_operator ---
+const quantum_operator_classes = [
+]
 
 const quantum_operator_functions = [
     :create_quantum_operator_from_openfermion_file,
     :create_quantum_operator_from_openfermion_text,
     :create_split_quantum_operator,
 ]
-
-#=
-for func in quantum_operator_functions
-    @eval begin
-        function $(func)(args...; kwargs...)
-            qulacs.quantum_operator.$(func)(args...; kwargs...)
-        end
-        export $(func)
-    end
-end
-=#
 
 for func in quantum_operator_functions
     @eval begin
@@ -32,7 +24,6 @@ for func in quantum_operator_functions
 end
 
 function __init__()
-    #copy!(qulacs, pyimport("qulacs"))
     copy!(quantum_operator, pyimport("qulacs.quantum_operator"))
 end
 
