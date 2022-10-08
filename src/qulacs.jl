@@ -56,6 +56,16 @@ for class in qulacs_class
 end
 
 function __init__()
+    try
+        # Try to import "scipy" from Python
+        pyimport_conda("scipy", "scipy")
+    catch e
+        @warn """
+        Kyulacs.$(nameof(@__MODULE__)) has failed to import scipy from Python.
+        It is necessary to call `get_matrix` method with in a gate object or a observable object.
+        Please make sure these are installed.
+        """
+    end
     copy!(qulacs, pyimport("qulacs"))
 end
 
