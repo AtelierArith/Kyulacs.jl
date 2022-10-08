@@ -3,27 +3,17 @@ module State
 using PyCall
 import ..@pyfunc
 
-#qulacs = PyNULL()
-
 state = PyNULL()
-const state_functions = [
-    :inner_product,
-    :tensor_product,
-    :permutate_qubit,
-    :drop_qubit,
-    :partial_trace,
+const state_classes = [
 ]
 
-#=
-for func in state_functions
-    @eval begin
-        function $(func)(args...; kwargs...)
-            qulacs.state.$(func)(args...; kwargs...)
-        end
-        export $(func)
-    end
-end
-=#
+const state_functions = [
+    :drop_qubit,
+    :inner_product,
+    :partial_trace,
+    :permutate_qubit,
+    :tensor_product,
+]
 
 for func in state_functions
     @eval begin
@@ -33,7 +23,6 @@ for func in state_functions
 end
 
 function __init__()
-    #copy!(qulacs, pyimport("qulacs"))
     copy!(state, pyimport("qulacs.state"))
 end
 
