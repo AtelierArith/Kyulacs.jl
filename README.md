@@ -14,6 +14,12 @@ Unofficial Julia interface for [qulacs](https://github.com/qulacs/qulacs).
 $ pip3 install qulacs
 ```
 
+We also need to install `scipy`
+
+```console
+$ pip3 install scipy
+```
+
 2. Install Julia. If you're Julian, you can skip this step.
 
 ```console
