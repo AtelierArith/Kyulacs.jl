@@ -1,6 +1,7 @@
 *.gif
 *.ipynb
 .DS_Store
+__pycache__
 .ipynb_checkpoints
 Manifest.toml
 /docs/build/
