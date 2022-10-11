@@ -8,16 +8,16 @@ Unofficial Julia interface for [qulacs](https://github.com/qulacs/qulacs).
 
 # Prerequisites
 
-1. Install Python and `qulacs` via
+1. Install Python and `qulacs`, `qulacsvis` via
 
 ```console
-$ pip3 install qulacs
+$ pip3 install qulacs qulacsvis
 ```
 
-We also need to install `scipy`
+We also need to install `scipy` and `dataclasses_json`
 
 ```console
-$ pip3 install scipy
+$ pip3 install scipy dataclasses_json
 ```
 
 2. Install Julia. If you're Julian, you can skip this step.
