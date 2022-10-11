@@ -26,6 +26,9 @@ include("quantum_operator.jl")
 # qulacs.state
 include("state.jl")
 
+# qulacsvis.visualization
+include("qulacsvis.jl")
+
 function print_configurations()
     metadata = pyimport("importlib.metadata")
     println("-- PyCall.jl settings --")
