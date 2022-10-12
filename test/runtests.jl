@@ -1,5 +1,7 @@
 import Kyulacs
+
 using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
+using Kyulacs: pyrange
 using Kyulacs.Gate: CNOT, Y, merge
 using PyCall
 
