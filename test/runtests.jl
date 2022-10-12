@@ -2,8 +2,12 @@ import Kyulacs
 
 using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
 using Kyulacs: pyrange
+using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState,
+    ParametricQuantumCircuit
 using Kyulacs.Gate: CNOT, Y, merge
+using Kyulacs.QulacsVis: circuit_drawer
 using PyCall
+using IOCapture
 
 using Test
 
@@ -154,4 +158,32 @@ end
             @test obs.get_matrix().todense() ≈ expected
         end
     end
+end
+
+@testset "QulacsVis" begin
+    nqubits = 2
+    circuit = ParametricQuantumCircuit(nqubits)
+    circuit.add_parametric_RY_gate(0, 0.0)
+    circuit.add_parametric_RY_gate(1, 0.0)
+
+    circuit.add_parametric_RY_gate(0, 0.0)
+    circuit.add_CNOT_gate(0, 1)
+    circuit.add_parametric_RY_gate(0, 0.0)
+
+    c = IOCapture.capture() do
+        circuit_drawer(circuit)
+    end
+    out = c.output
+
+    expected = """
+       ___     ___             ___   
+      |pRY|   |pRY|           |pRY|  
+    --|   |---|   |-----●-----|   |--
+      |___|   |___|     |     |___|  
+       ___             _|_           
+      |pRY|           |CX |          
+    --|   |-----------|   |----------
+      |___|           |___|          
+    """
+    @test out == expected
 end
