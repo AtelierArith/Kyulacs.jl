@@ -1,11 +1,11 @@
 import Kyulacs
 
-using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
-using Kyulacs: pyrange
 using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState,
     ParametricQuantumCircuit
+using Kyulacs: pyrange, print_configurations
 using Kyulacs.Gate: CNOT, Y, merge
 using Kyulacs.QulacsVis: circuit_drawer
+
 using PyCall
 using IOCapture
 
@@ -20,7 +20,6 @@ using Test
     expected = 0:(N-1) |> collect
     @test numbers == expected
 end
-
 
 # display package config
 Kyulacs.print_configurations()
