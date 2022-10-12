@@ -29,6 +29,12 @@ include("state.jl")
 # qulacsvis.visualization
 include("qulacsvis.jl")
 
+# === python utils ===
+export pyrange
+const pyrange = PyNULL()
+
+# end python utils
+
 function print_configurations()
     metadata = pyimport("importlib.metadata")
     println("-- PyCall.jl settings --")
@@ -42,6 +48,10 @@ function print_configurations()
     scipy_version = metadata.distribution("scipy").version
     @show scipy_version
     nothing
+end
+
+function __init__()
+    copy!(pyrange, pybuiltin("range"))
 end
 
 end # module Kyulacs
