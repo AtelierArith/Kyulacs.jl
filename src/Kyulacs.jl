@@ -45,6 +45,8 @@ function print_configurations()
     println("-- Python dependencies --")
     qulacs_version = metadata.distribution("qulacs").version
     @show qulacs_version
+    qulacsvis_version = metadata.distribution("qulacsvis").version
+    @show qulacsvis_version
     scipy_version = metadata.distribution("scipy").version
     @show scipy_version
     nothing
