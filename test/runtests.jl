@@ -1,9 +1,22 @@
 import Kyulacs
+
 using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState
+using Kyulacs: pyrange
 using Kyulacs.Gate: CNOT, Y, merge
 using PyCall
 
 using Test
+
+@testset "pyrange" begin
+    N = 10
+    numbers = []
+    for i in pyrange(N)
+        push!(numbers, i)
+    end
+    expected = 0:(N-1) |> collect
+    @test numbers == expected
+end
+
 
 # display package config
 Kyulacs.print_configurations()
