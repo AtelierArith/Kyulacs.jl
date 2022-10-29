@@ -7,7 +7,6 @@ using Kyulacs.Gate: CNOT, Y, merge
 using Kyulacs.QulacsVis: circuit_drawer
 
 using PyCall
-using IOCapture
 
 using Test
 
