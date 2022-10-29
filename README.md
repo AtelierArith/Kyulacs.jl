@@ -8,16 +8,10 @@ Unofficial Julia interface for [qulacs](https://github.com/qulacs/qulacs).
 
 # Prerequisites
 
-1. Install Python and `qulacs`, `qulacsvis` via
+1. Install Python and `qulacs` >= 0.5.1, `qulacsvis` >= 0.3.2 via
 
 ```console
 $ pip3 install qulacs qulacsvis
-```
-
-We also need to install `scipy` and `dataclasses_json`
-
-```console
-$ pip3 install scipy dataclasses_json
 ```
 
 2. Install Julia. If you're Julian, you can skip this step.
@@ -181,11 +175,14 @@ When you want migrate your code from Python to Julia, the following table may he
 
 Python  | Julia
 ------------- | -------------
+`from qulacs import something` | `using Kyulacs: something`
 `from qulacs.circuit import something` | `using Kyulacs.Gate: something`
 `from qulacs.gate import something` | `using Kyulacs.Gate: something`
 `from qulacs.observable import something` | `using Kyulacs.ObservableFunctions: something`
 `from qulacs.quantum_operator import something` | `using Kyulacs.QuantumOperator: something`
 `from qulacs.state import something` | `using Kyulacs.State: something`
+`from qulacsvis.visualization import something` | `using Kyulacs.Vis: something`
+
 
 If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send your feedback/idea to [our issue tracker](https://github.com/AtelierArith/Kyulacs.jl/issues).
 
@@ -193,9 +190,45 @@ If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send 
 
 `using Kyulacs.GPU` will export `StateVectorGpu` and `QuantumStateGpu` that wraps `qulacs.StateVectorGpu` and `qulacs.QuantumStateGpu` respectively.
 
+# Visualization
+
+Kyulacs.jl also supports `qulacsvis` integration. The statement `using Kyulacs.Vis` allows us to use Python API under `qulacsvis.visualization`. Consider the following Julia code:
+
+```julia
+using Kyulacs: ParametricQuantumCircuit
+
+# exports `circuit_drawer`
+using Kyulacs.Vis
+
+nqubits = 2
+circuit = ParametricQuantumCircuit(nqubits)
+circuit.add_parametric_RY_gate(0, 0.0)
+circuit.add_parametric_RY_gate(1, 0.0)
+
+circuit.add_parametric_RY_gate(0, 0.0)
+circuit.add_CNOT_gate(0, 1)
+circuit.add_parametric_RY_gate(0, 0.0)
+
+circuit_drawer(circuit)
+```
+
+We'll get:
+
+```console
+   ___     ___             ___
+  |pRY|   |pRY|           |pRY|
+--|   |---|   |-----●-----|   |--
+  |___|   |___|     |     |___|
+   ___             _|_
+  |pRY|           |CX |
+--|   |-----------|   |----------
+  |___|           |___|
+
+```
+
 # Docker
 
-- You can run Kyulacs.jl out of the box inside Docker container
+- You can run Kyulacs.jl out of the box inside the official Julia Docker container:
 
 ```console
 $ docker run --rm -it julia:1.8.2
@@ -214,7 +247,6 @@ julia> Pkg.add("Conda") # Install Conda.jl
 julia> using Conda
 julia> Conda.pip_interop(true)
 julia> Conda.pip("install", "qulacs")
-julia> Conda.pip("install", "scipy")
 julia> using Kyulacs: Observable, QuantumCircuit, QuantumState
 julia> using Kyulacs.Gate: CNOT, Y, merge
 julia> state = QuantumState(3)

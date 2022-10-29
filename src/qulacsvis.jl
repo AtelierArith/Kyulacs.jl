@@ -1,4 +1,4 @@
-module QulacsVis
+module Vis
 
 using PyCall
 using Reexport
