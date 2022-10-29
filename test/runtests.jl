@@ -174,8 +174,15 @@ end
     end
 
     @show c
-    
     out = c.output
+
+    if isempty(out)
+        buf = IOBuffer()
+        pyimport("sys")."stdout" = PyTextIO(buf)
+        circuit_drawer(circuit)
+        out = buf |> take! |> String
+    end
+
 
     expected = """
        ___     ___             ___   
