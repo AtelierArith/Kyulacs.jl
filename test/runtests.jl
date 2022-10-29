@@ -172,6 +172,9 @@ end
     c = IOCapture.capture() do
         circuit_drawer(circuit)
     end
+
+    @show c
+    
     out = c.output
 
     expected = """
