@@ -169,20 +169,13 @@ end
     circuit.add_CNOT_gate(0, 1)
     circuit.add_parametric_RY_gate(0, 0.0)
 
-    c = IOCapture.capture() do
-        circuit_drawer(circuit)
-    end
-
-    @show c
-    out = c.output
-
-    if isempty(out)
-        buf = IOBuffer()
-        pyimport("sys")."stdout" = PyTextIO(buf)
-        circuit_drawer(circuit)
-        out = buf |> take! |> String
-    end
-
+    # capture output of Python's stdout on GitHub Action
+    buf = IOBuffer()
+    pystdout = pyimport("sys")."stdout"
+    pyimport("sys")."stdout" = PyTextIO(buf)
+    circuit_drawer(circuit)
+    out = buf |> take! |> String
+    pyimport("sys")."stdout" = pystdout
 
     expected = """
        ___     ___             ___   
