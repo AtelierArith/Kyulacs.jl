@@ -4,7 +4,7 @@ using Kyulacs: GeneralQuantumOperator, Observable, QuantumCircuit, QuantumState,
     ParametricQuantumCircuit
 using Kyulacs: pyrange, print_configurations
 using Kyulacs.Gate: CNOT, Y, merge
-using Kyulacs.QulacsVis: circuit_drawer
+using Kyulacs.Vis: circuit_drawer
 
 using PyCall
 
@@ -158,7 +158,7 @@ end
     end
 end
 
-@testset "QulacsVis" begin
+@testset "Vis" begin
     nqubits = 2
     circuit = ParametricQuantumCircuit(nqubits)
     circuit.add_parametric_RY_gate(0, 0.0)
