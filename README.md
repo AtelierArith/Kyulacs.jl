@@ -32,7 +32,7 @@ $ julia
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
+  | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -51,7 +51,7 @@ $ julia
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
+  | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -231,13 +231,13 @@ We'll get:
 - You can run Kyulacs.jl out of the box inside the official Julia Docker container:
 
 ```console
-$ docker run --rm -it julia:1.8.2
+$ docker run --rm -it julia:1.8.3
                _
    _       _ _(_)_     |  Documentation: https://docs.julialang.org
   (_)     | (_) (_)    |
    _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
   | | | | | | |/ _` |  |
-  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
+  | | |_| | | | (_| |  |  Version 1.8.3 (2022-11-14)
  _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
 |__/                   |
 
@@ -247,6 +247,7 @@ julia> Pkg.add("Conda") # Install Conda.jl
 julia> using Conda
 julia> Conda.pip_interop(true)
 julia> Conda.pip("install", "qulacs")
+julia> Conda.pip("install", "qulacsvis")
 julia> using Kyulacs: Observable, QuantumCircuit, QuantumState
 julia> using Kyulacs.Gate: CNOT, Y, merge
 julia> state = QuantumState(3)
