@@ -20,6 +20,34 @@ using Test
     @test numbers == expected
 end
 
+@testset "readme example" begin
+    using Markdown
+    m = Markdown.parse_file(joinpath(dirname(@__DIR__), "README.md"))
+    codeblocks = filter(m.content) do c
+        c isa Markdown.Code
+    end
+
+    for c in codeblocks
+        if startswith(c.language, "julia") || startswith(c.language, "jl")
+            codefile = split(c.language, ":")[end]
+            !startswith(codefile, "readme_test") && continue
+
+            if !endswith(codefile, ".jl")
+                codefile *= ".jl"
+            end
+
+            open(codefile, "w") do f
+                write(f, c.code)
+            end
+            # exec test
+            @testset "$(codefile)" begin
+                include(codefile)
+                @test true
+            end
+        end
+    end
+end
+
 # display package config
 Kyulacs.print_configurations()
 
