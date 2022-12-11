@@ -112,7 +112,7 @@ $ julia --project=@. examples/readme_example.jl
 
 In Julia, we can achieve the same functionality with `Kyulacs` package.
 
-```julia
+```julia:readme_test_readme_example.jl
 # examples/readme_example.jl
 using Kyulacs: Observable, QuantumCircuit, QuantumState
 using Kyulacs.Gate: CNOT, Y, merge
@@ -194,7 +194,7 @@ If you feel `using Kyulacs.ObservableFunctions` is too exaggerated. Please send 
 
 Kyulacs.jl also supports `qulacsvis` integration. The statement `using Kyulacs.Vis` allows us to use Python API under `qulacsvis.visualization`. Consider the following Julia code:
 
-```julia
+```julia:readme_test_circuit_drawer.jl
 using Kyulacs: ParametricQuantumCircuit
 
 # exports `circuit_drawer`
