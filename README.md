@@ -279,6 +279,7 @@ $ make build-gpu && make test-gpu # for gpu version
 ## Blog post
 
 - [Zenn: (Japanese blog post)](https://zenn.dev/terasakisatoshi/articles/983a7401524251)
+- [Qiita: (Japanese blog post)](https://qiita.com/SatoshiTerasaki/items/9daca044ee4026f19a02)
 
 # Sponsorship
 
