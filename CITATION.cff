@@ -1,0 +1,29 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'Kyulacs.jl: Julia interface for Qulacs'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - name: AtelierArith
+    city: Sendai
+    country: JP
+    post-code: 980-0004
+    email: s.terasaki@atelier-arith.jp
+    date-start: '2021-04-01'
+    website: 'https://github.com/AtelierArith'
+repository-code: 'https://github.com/AtelierArith/Kyulacs.jl'
+url: 'https://github.com/AtelierArith/Kyulacs.jl'
+abstract: 'Kyulacs.jl: Julia interface for Qulacs.'
+keywords:
+  - Quantum Computing
+  - Azarashi
+  - Julia
+  - Qulacs
+license: MIT
+commit: 093ee1aaa1341446bb7a31734e5c0e98b71f12a6
+version: v0.1.0
+date-released: '2024-02-05'
